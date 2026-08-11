@@ -928,9 +928,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   <div id="adminView" style="display:none; height:100%; display:flex; flex-direction:column;">
     <div class="drawer-head">
       <h3>Manage Site</h3>
-      <button class="drawer-close" id="drawerClose">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
+      <div style="display:flex; align-items:center;">
+        <button class="btn-sm btn-outline" id="adminLogoutBtn" style="margin-right:8px;">Exit Admin</button>
+        <button class="drawer-close" id="drawerClose">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
     </div>
     <div class="drawer-tabs">
       <button class="dtab active" data-tab="products">Products</button>
@@ -1672,6 +1675,16 @@ function tryLogin(){
     document.getElementById("loginErr").textContent = "That passcode isn't right — try again.";
   }
 }
+
+function logoutAdmin(){
+  isAdmin = false;
+  sessionStorage.removeItem("vv_admin");
+  applyAdminClass();
+  closeDrawer();
+  renderProducts(); renderOffers(); renderFeedback();
+  toast("Exited admin mode");
+}
+document.getElementById("adminLogoutBtn").addEventListener("click", logoutAdmin);
 
 document.querySelectorAll(".dtab").forEach(tab=>{
   tab.addEventListener("click", ()=> openAdminTab(tab.dataset.tab));
