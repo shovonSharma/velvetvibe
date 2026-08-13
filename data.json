@@ -1,0 +1,116 @@
+{
+  "products": [
+    {
+      "id": "pmsr0zwhijudu",
+      "name": "কাশ্মীরি চুড়ি সেট",
+      "category": "Churi",
+      "price": 1999,
+      "desc": "set of 72",
+      "badge": "New",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/products/pmsr0zwhijudu.jpg"
+    },
+    {
+      "id": "pmsqfgcbvlbc5",
+      "name": "Metal Jhumka",
+      "category": "Earrings",
+      "price": 199,
+      "desc": "Color warranty",
+      "badge": "Few Left",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/products/pmsqfgcbvlbc5.jpg"
+    },
+    {
+      "id": "pmsqfdiq6zt13",
+      "name": "Homemade churi",
+      "category": "Churi",
+      "price": 299,
+      "desc": "✨ Homemade মানেই যত্ন, ভালোবাসা আর বিশ্বাস।",
+      "badge": "",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/products/pmsqfdiq6zt13.jpg"
+    },
+    {
+      "id": "pmsqf97ag6gsx",
+      "name": "Rose-pink bracelet",
+      "category": "Bracelets",
+      "price": 399,
+      "desc": "",
+      "badge": "New",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/products/pmsqf97ag6gsx.jpg"
+    },
+    {
+      "id": "pmsqf3s4c9eb0",
+      "name": "Homemade Churi",
+      "category": "Churi",
+      "price": 199,
+      "desc": "Made for You❤️ কারখানার নয়, ভালোবাসার ছোঁয়ায় তৈরি।\nপ্রতিটি প্রোডাক্ট তৈরি করা হয় নিখুঁত যত্নে, যেন আপনার সৌন্দর্যে যোগ হয় একটুখানি বিশেষ ছোঁয়া।",
+      "badge": "",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/products/pmsqf3s4c9eb0.jpg"
+    },
+    {
+      "id": "pmsqeyqf7x98l",
+      "name": "কাশ্মীরি চুড়ি সেট",
+      "category": "Churi",
+      "price": 1999,
+      "desc": "set of 72, স্টাইলিশ ডিজাইন, দারুণ কালার কম্বিনেশন",
+      "badge": "Bestseller",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/products/pmsqeyqf7x98l.jpg"
+    },
+    {
+      "id": "pmsqbr8pljoau",
+      "name": "Swan Chain",
+      "category": "Neck Chains",
+      "price": 130,
+      "desc": "",
+      "badge": "Bestseller",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/products/pmsqbr8pljoau.jpg"
+    },
+    {
+      "id": "pmsqbq3zllym3",
+      "name": "Butterfly Chain",
+      "category": "Neck Chains",
+      "price": 130,
+      "desc": "",
+      "badge": "Few Left",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/products/pmsqbq3zllym3.jpg"
+    }
+  ],
+  "offers": [
+    {
+      "id": "omsqblujpnfc2",
+      "title": "New Arrival—Pink Gold Kashmiri Churi",
+      "sub": "This is exactly what i want 💖",
+      "badge": "999Tk",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/offers/omsqblujpnfc2.jpg"
+    },
+    {
+      "id": "omsqc3s3a73hb",
+      "title": "Kashmiri set",
+      "sub": "",
+      "badge": "1999Tk",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/offers/omsqc3s3a73hb.jpg"
+    },
+    {
+      "id": "omsqeqn9x6fib",
+      "title": "Stock clearance offer on reshmi churi",
+      "sub": "",
+      "badge": "120Tk only",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/offers/omsqeqn9x6fib.jpg"
+    }
+  ],
+  "feedback": [
+    {
+      "id": "fmsqbndx6wsky",
+      "caption": "",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/feedback/fmsqbndx6wsky.jpg"
+    },
+    {
+      "id": "fmsqbn65jyobk",
+      "caption": "",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/feedback/fmsqbn65jyobk.jpg"
+    },
+    {
+      "id": "fmsqbmueu70ld",
+      "caption": "",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/feedback/fmsqbmueu70ld.jpg"
+    }
+  ]
+}
