@@ -194,13 +194,13 @@ nav.main-nav a::after{
 }
 nav.main-nav a:hover::after{width:100%;}
 .header-actions{display:flex; align-items:center; gap:10px;}
-.fb-link{
+.social-link{
   width:38px; height:38px; border-radius:50%;
   display:flex; align-items:center; justify-content:center;
   background:rgba(255,255,255,0.55); color:var(--rose-deep);
   transition:background .2s, color .2s, transform .2s;
 }
-.fb-link:hover{background:var(--rose-deep); color:var(--white); transform:translateY(-2px);}
+.social-link:hover{background:var(--rose-deep); color:var(--white); transform:translateY(-2px);}
 .hamburger{
   display:none; width:40px; height:40px; border:none; background:rgba(255,255,255,0.55);
   border-radius:10px; align-items:center; justify-content:center;
@@ -220,7 +220,7 @@ nav.main-nav a:hover::after{width:100%;}
   height:100%; padding:0 20px; max-width:var(--maxw); margin:0 auto;
 }
 .sticky-nav .brand .name{font-size:20px;}
-.sticky-nav .fb-link, .sticky-nav .hamburger{background:var(--blush);}
+.sticky-nav .social-link, .sticky-nav .hamburger{background:var(--blush);}
 
 .mobile-menu{
   display:none; position:fixed; inset:0; z-index:95;
@@ -703,8 +703,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
       <a href="#contact">Contact</a>
     </nav>
     <div class="header-actions">
-      <a class="fb-link" id="fbLinkSticky" href="#" target="_blank" rel="noopener" aria-label="Visit our Facebook page" title="Facebook">
+      <a class="social-link" id="fbLinkSticky" href="#" target="_blank" rel="noopener" aria-label="Visit our Facebook page" title="Facebook">
         <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.6h2.55l.38-2.96h-2.93v-1.9c0-.86.24-1.44 1.47-1.44h1.57V4.44c-.27-.04-1.2-.12-2.28-.12-2.26 0-3.8 1.38-3.8 3.92v2.19H8v2.96h2.46V21h3.04z"/></svg>
+      </a>
+      <a class="social-link" id="tiktokLinkSticky" href="#" target="_blank" rel="noopener" aria-label="Visit our TikTok page" title="TikTok">
+        <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82c-.93-.9-1.44-2.14-1.44-3.42h-3.1v13.4c0 1.55-1.26 2.8-2.8 2.8a2.8 2.8 0 0 1-2.8-2.8 2.8 2.8 0 0 1 2.8-2.8c.28 0 .55.04.8.12v-3.15c-.26-.03-.53-.05-.8-.05-2.98 0-5.4 2.42-5.4 5.4s2.42 5.4 5.4 5.4 5.4-2.42 5.4-5.4V9.28a7.9 7.9 0 0 0 4.6 1.47v-3.1c-1 0-1.98-.34-2.66-.83z"/></svg>
       </a>
       <button class="hamburger" id="hamburgerBtnSticky" aria-label="Open menu">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -725,6 +728,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   <a href="#reviews" class="mobile-link">Reviews</a>
   <a href="#contact" class="mobile-link">Contact</a>
   <a href="#" id="fbLinkMobile" target="_blank" rel="noopener" class="mobile-link">Facebook Page ↗</a>
+  <a href="#" id="tiktokLinkMobile" target="_blank" rel="noopener" class="mobile-link">TikTok Page ↗</a>
 </div>
 
 <!-- ============================================================
@@ -745,8 +749,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
       <a href="#contact">Contact</a>
     </nav>
     <div class="header-actions">
-      <a class="fb-link" id="fbLinkDesktop" href="#" target="_blank" rel="noopener" aria-label="Visit our Facebook page" title="Facebook">
+      <a class="social-link" id="fbLinkDesktop" href="#" target="_blank" rel="noopener" aria-label="Visit our Facebook page" title="Facebook">
         <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.6h2.55l.38-2.96h-2.93v-1.9c0-.86.24-1.44 1.47-1.44h1.57V4.44c-.27-.04-1.2-.12-2.28-.12-2.26 0-3.8 1.38-3.8 3.92v2.19H8v2.96h2.46V21h3.04z"/></svg>
+      </a>
+      <a class="social-link" id="tiktokLinkDesktop" href="#" target="_blank" rel="noopener" aria-label="Visit our TikTok page" title="TikTok">
+        <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82c-.93-.9-1.44-2.14-1.44-3.42h-3.1v13.4c0 1.55-1.26 2.8-2.8 2.8a2.8 2.8 0 0 1-2.8-2.8 2.8 2.8 0 0 1 2.8-2.8c.28 0 .55.04.8.12v-3.15c-.26-.03-.53-.05-.8-.05-2.98 0-5.4 2.42-5.4 5.4s2.42 5.4 5.4 5.4 5.4-2.42 5.4-5.4V9.28a7.9 7.9 0 0 0 4.6 1.47v-3.1c-1 0-1.98-.34-2.66-.83z"/></svg>
       </a>
       <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -799,7 +806,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     </div>
     <div class="trust-item">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/></svg>
-      <p>Quality checked</p>
+      <p>Premium Quality</p>
     </div>
     <div class="trust-item">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -851,11 +858,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     <h2>Found something you love?</h2>
     <p>Message me directly — I personally reply to every order and answer every question myself.</p>
     <div class="hero-ctas">
-      <a href="#" id="waFinalCta" target="_blank" rel="noopener" class="btn btn-light">
-        <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.7.44 3.35 1.28 4.8L2 22l5.42-1.42a9.9 9.9 0 0 0 4.62 1.18h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.1.1-1.78-.11-.4-.13-.93-.3-1.6-.6-2.8-1.21-4.63-4.03-4.77-4.22-.14-.19-1.14-1.52-1.14-2.9 0-1.37.72-2.05.98-2.33.26-.28.56-.35.75-.35h.53c.17 0 .4-.02.62.48.24.55.8 1.92.87 2.06.07.14.12.3.02.49-.09.19-.14.3-.28.46-.14.16-.3.36-.42.48-.14.14-.29.29-.13.57.17.28.75 1.24 1.6 2 .1.09.19.19.29.28.9.79 1.68 1.28 2.15 1.44.28.1.44.08.6-.06.16-.13.63-.68.8-.92.16-.24.32-.19.55-.11.23.08 1.44.68 1.68.8.24.12.4.18.46.28.06.11.06.61-.18 1.28z"/></svg>
-        Message on WhatsApp
+      <a href="#" id="fbFinalCta" target="_blank" rel="noopener" class="btn btn-light">
+        <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.6h2.55l.38-2.96h-2.93v-1.9c0-.86.24-1.44 1.47-1.44h1.57V4.44c-.27-.04-1.2-.12-2.28-.12-2.26 0-3.8 1.38-3.8 3.92v2.19H8v2.96h2.46V21h3.04z"/></svg>
+        Follow on Facebook
       </a>
-      <a href="#" id="fbFinalCta" target="_blank" rel="noopener" class="btn btn-outline-light">Visit Facebook Page</a>
+      <a href="#" id="tiktokFinalCta" target="_blank" rel="noopener" class="btn btn-outline-light">Follow on TikTok</a>
     </div>
   </div>
 </section>
@@ -886,8 +893,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
       </div>
       <div class="footer-col">
         <h4>Get in touch</h4>
-        <a href="#" id="waFooter" target="_blank" rel="noopener">WhatsApp</a>
         <a href="#" id="fbFooter" target="_blank" rel="noopener">Facebook</a>
+        <a href="#" id="tiktokFooter" target="_blank" rel="noopener">TikTok</a>
       </div>
     </div>
   </div>
@@ -1066,8 +1073,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 /* ============================================================
    SETTINGS — edit these three lines for your own shop
    ============================================================ */
-const WHATSAPP_NUMBER = "8801XXXXXXXXX";      // <-- WhatsApp number here (with country code, no + or spaces)
 const FACEBOOK_URL     = "https://www.facebook.com/profile.php?id=61589467021151"; // <-- Facebook page link here
+const TIKTOK_URL       = "https://www.tiktok.com/@velvetvibe13"; // <-- TikTok page link here
 const ADMIN_PASSCODE   = "kindmohona";        // <-- change this to your own secret passcode
 
 const GITHUB_OWNER  = "shovonSharma";
@@ -1090,7 +1097,7 @@ const SEED_PRODUCTS = [
   {id:"p6", name:"Rose Charm Bracelet", category:"Bracelets", price:260, desc:"Rose gold chain with charm detail.", badge:"Few Left", img:""}
 ];
 const SEED_OFFERS = [
-  {id:"o1", title:"Welcome Offer — 10% Off Your First Order", sub:"Message us on WhatsApp to claim it", badge:"NEW", img:""},
+  {id:"o1", title:"Welcome Offer — 10% Off Your First Order", sub:"Message us on Facebook to claim it", badge:"NEW", img:""},
   {id:"o2", title:"Buy 2 Churi Sets, Get 1 Free", sub:"This week only, while stock lasts", badge:"LIMITED", img:""}
 ];
 const SEED_FEEDBACK = [
@@ -1284,10 +1291,6 @@ function toast(msg){
   clearTimeout(toast._t);
   toast._t = setTimeout(()=>t.classList.remove("show"), 2200);
 }
-function waLink(productName){
-  const text = encodeURIComponent(productName ? `Hi! I'm interested in the "${productName}" from Vel Vet Vibe.` : "Hi! I'm interested in your products at Vel Vet Vibe.");
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
-}
 function catIcon(cat){
   const icons = {
     "Churi": '<svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg>',
@@ -1427,7 +1430,6 @@ function renderOffers(){
   ticker.innerHTML = `<span>${esc(tickerText)}</span><span>${esc(tickerText)}</span>`;
 
   track.innerHTML = state.offers.map((o,i) => {
-    const waText = encodeURIComponent(`Hi! I'd love to claim this offer: "${o.title}"`);
     return `
     <div class="offer2-slide">
       ${o.img ? `<img class="bg-img" src="${o.img}" alt="${esc(o.title)}">` : `<div class="bg-fallback"></div>`}
@@ -1447,7 +1449,7 @@ function renderOffers(){
         <h3 class="offer2-title">${esc(o.title)}</h3>
         ${o.sub ? `<p class="offer2-sub">${esc(o.sub)}</p>` : ""}
         <div class="offer2-cta-row">
-          <a class="offer2-cta" href="https://wa.me/${WHATSAPP_NUMBER}?text=${waText}" target="_blank" rel="noopener">Claim This Deal →</a>
+          <a class="offer2-cta" href="${FACEBOOK_URL}" target="_blank" rel="noopener">Claim This Deal →</a>
           <span class="offer2-urgency">${URGENCY_LINES[i % URGENCY_LINES.length]}</span>
         </div>
       </div>
@@ -1536,8 +1538,8 @@ function renderProducts(){
         ${p.desc ? `<div class="product-desc">${esc(p.desc)}</div>` : ""}
         <div class="product-foot">
           <div class="product-price">৳${Number(p.price).toLocaleString()}</div>
-          <a class="order-btn" href="${waLink(p.name)}" target="_blank" rel="noopener">
-            <svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.7.44 3.35 1.28 4.8L2 22l5.42-1.42a9.9 9.9 0 0 0 4.62 1.18h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2z"/></svg>
+          <a class="order-btn" href="${FACEBOOK_URL}" target="_blank" rel="noopener">
+            <svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.6h2.55l.38-2.96h-2.93v-1.9c0-.86.24-1.44 1.47-1.44h1.57V4.44c-.27-.04-1.2-.12-2.28-.12-2.26 0-3.8 1.38-3.8 3.92v2.19H8v2.96h2.46V21h3.04z"/></svg>
             Order
           </a>
         </div>
@@ -1612,14 +1614,14 @@ document.getElementById("lightbox").addEventListener("click", e=>{
 });
 
 /* ============================================================
-   HEADER LINKS (FB / WhatsApp)
+   HEADER LINKS (Facebook / TikTok)
    ============================================================ */
 function applyLinks(){
   ["fbLinkDesktop","fbLinkSticky","fbLinkMobile","fbFooter","fbFinalCta"].forEach(id=>{
     const el = document.getElementById(id); if(el) el.href = FACEBOOK_URL;
   });
-  ["waFooter","waFinalCta"].forEach(id=>{
-    const el = document.getElementById(id); if(el) el.href = waLink();
+  ["tiktokLinkDesktop","tiktokLinkSticky","tiktokLinkMobile","tiktokFooter","tiktokFinalCta"].forEach(id=>{
+    const el = document.getElementById(id); if(el) el.href = TIKTOK_URL;
   });
 }
 
