@@ -160,10 +160,11 @@ button{font-family:var(--ff-body); cursor:pointer;}
 .hero-header{
   position:relative; z-index:5;
   display:flex; align-items:center; justify-content:space-between;
-  padding:18px 20px 6px; max-width:var(--maxw); margin:0 auto;
+  gap:12px;
+  padding:18px 20px 10px; max-width:var(--maxw); margin:0 auto;
 }
-.brand{display:flex; align-items:center; gap:10px; line-height:1;}
-.brand-text{display:flex; flex-direction:column; line-height:1;}
+.brand{display:flex; align-items:center; gap:10px; line-height:1; min-width:0; flex:1 1 auto;}
+.brand-text{display:flex; flex-direction:column; line-height:1; min-width:0;}
 .brand-logo{
   width:44px; height:44px; border-radius:50%; flex:none;
   box-shadow:0 2px 10px rgba(58,31,43,0.18);
@@ -175,7 +176,7 @@ button{font-family:var(--ff-body); cursor:pointer;}
   -webkit-background-clip:text; background-clip:text; color:transparent;
 }
 .brand .tagline{
-  font-size:10.5px; letter-spacing:2px; text-transform:uppercase;
+  font-size:10.5px; letter-spacing:1.4px; text-transform:uppercase;
   color:var(--plum-soft); margin-top:3px; font-weight:500;
 }
 .hero-header .brand .name{font-size:24px;}
@@ -193,16 +194,16 @@ nav.main-nav a::after{
   background:var(--gold); transition:width .25s ease;
 }
 nav.main-nav a:hover::after{width:100%;}
-.header-actions{display:flex; align-items:center; gap:10px;}
+.header-actions{display:flex; align-items:center; gap:8px; flex:none;}
 .social-link{
-  width:38px; height:38px; border-radius:50%;
+  width:38px; height:38px; border-radius:50%; flex:none;
   display:flex; align-items:center; justify-content:center;
   background:rgba(255,255,255,0.55); color:var(--rose-deep);
   transition:background .2s, color .2s, transform .2s;
 }
 .social-link:hover{background:var(--rose-deep); color:var(--white); transform:translateY(-2px);}
 .hamburger{
-  display:none; width:40px; height:40px; border:none; background:rgba(255,255,255,0.55);
+  display:none; width:40px; height:40px; border:none; background:rgba(255,255,255,0.55); flex:none;
   border-radius:10px; align-items:center; justify-content:center;
 }
 
@@ -665,6 +666,13 @@ footer .footer-blurb{margin-top:14px; max-width:230px; color:var(--plum-soft); f
   .trust-row{grid-template-columns:repeat(2,1fr);}
 }
 @media (max-width:480px){
+  .hero-header{padding:14px 14px 8px 10px; gap:8px;}
+  .hero-header .brand-logo{width:44px; height:44px;}
+  .hero-header .brand .name{font-size:20px;}
+  .brand .tagline{font-size:9.5px; letter-spacing:1px;}
+  .header-actions{gap:6px;}
+  .social-link{width:34px; height:34px;}
+  .hamburger{width:36px; height:36px;}
   .hero-inner{padding:26px 16px 36px;}
   .hero-ctas{flex-direction:column; align-items:stretch;}
   .hero-ctas .btn{justify-content:center;}
@@ -739,7 +747,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     <div class="brand">
       <img class="brand-logo" data-logo src="" alt="Vel Vet Vibe logo">
       <span class="brand-text">
-        <span class="name">VelVet Vibe</span>
+        <span class="name">Vel Vet Vibe</span>
         <span class="tagline">Elegance starts here 🛍️</span>
       </span>
     </div>
