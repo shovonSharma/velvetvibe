@@ -1,4 +1,4 @@
-<!-- har har Mahadev --><!DOCTYPE html>
+<!-- HAR HAR MAHADEV --><!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -539,16 +539,33 @@ nav.main-nav a:hover::after{width:100%;}
 }
 .final-cta h2{color:#fff; font-size:clamp(28px,5vw,42px); text-shadow:0 2px 18px rgba(58,31,43,0.18);}
 .final-cta p{color:#fff; opacity:0.95; margin-bottom:26px;}
-.final-cta .hero-ctas{margin-bottom:0;}
+.final-cta .hero-ctas{margin-bottom:0; align-items:center;}
 .btn-light{
   background:#fff; color:var(--rose-deep);
-  box-shadow:0 8px 22px rgba(58,31,43,0.25);
+  box-shadow:0 6px 18px rgba(58,31,43,0.20);
+  letter-spacing:.2px;
 }
-.btn-light:hover{box-shadow:0 12px 28px rgba(58,31,43,0.32); transform:translateY(-2px);}
+.btn-light:hover{box-shadow:0 12px 26px rgba(58,31,43,0.28); transform:translateY(-2px);}
 .btn-outline-light{
-  background:transparent; border:1.5px solid rgba(255,255,255,0.8); color:#fff;
+  background:rgba(255,255,255,0.08); border:1.5px solid rgba(255,255,255,0.75); color:#fff;
+  letter-spacing:.2px;
 }
-.btn-outline-light:hover{background:rgba(255,255,255,0.18);}
+.btn-outline-light:hover{background:rgba(255,255,255,0.2); border-color:#fff; transform:translateY(-2px);}
+.final-cta .btn{gap:10px; padding:14px 28px;}
+.btn-icon-badge{
+  width:24px; height:24px; border-radius:50%; flex:none;
+  display:flex; align-items:center; justify-content:center;
+}
+.btn-light .btn-icon-badge{background:rgba(193,92,119,0.12);}
+.btn-outline-light .btn-icon-badge{background:rgba(255,255,255,0.16);}
+.btn-icon-badge .icon{width:14px; height:14px;}
+.cta-or{
+  color:#fff; opacity:.75; font-size:12px; letter-spacing:1.5px; text-transform:uppercase;
+  font-weight:500;
+}
+.cta-microcopy{
+  margin:18px 0 0; font-size:13px; color:#fff; opacity:.85;
+}
 
 /* ============================================================
    FOOTER — light, warm, on-brand
@@ -674,8 +691,9 @@ footer .footer-blurb{margin-top:14px; max-width:230px; color:var(--plum-soft); f
   .social-link{width:34px; height:34px;}
   .hamburger{width:36px; height:36px;}
   .hero-inner{padding:26px 16px 36px;}
-  .hero-ctas{flex-direction:column; align-items:stretch;}
-  .hero-ctas .btn{justify-content:center;}
+  .hero-ctas{flex-direction:column; align-items:stretch; gap:10px;}
+  .hero-ctas .btn{justify-content:center; padding:13px 24px;}
+  .cta-or{align-self:center;}
   .hero-stats{gap:22px;}
   .offer-slide{padding:26px 18px; gap:14px; min-height:140px;}
   .offer-media{width:76px; height:76px; border-radius:16px;}
@@ -684,7 +702,6 @@ footer .footer-blurb{margin-top:14px; max-width:230px; color:var(--plum-soft); f
   .offer-slide .offer-sub{font-size:12.5px;}
   .product-grid{grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:14px;}
   .product-name{font-size:17px;}
-  .final-cta .hero-ctas{flex-direction:column; align-items:stretch;}
 }
 
 /* focus visibility */
@@ -867,11 +884,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     <p>Message me directly — I personally reply to every order and answer every question myself.</p>
     <div class="hero-ctas">
       <a href="#" id="fbFinalCta" target="_blank" rel="noopener" class="btn btn-light">
-        <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.6h2.55l.38-2.96h-2.93v-1.9c0-.86.24-1.44 1.47-1.44h1.57V4.44c-.27-.04-1.2-.12-2.28-.12-2.26 0-3.8 1.38-3.8 3.92v2.19H8v2.96h2.46V21h3.04z"/></svg>
+        <span class="btn-icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.6h2.55l.38-2.96h-2.93v-1.9c0-.86.24-1.44 1.47-1.44h1.57V4.44c-.27-.04-1.2-.12-2.28-.12-2.26 0-3.8 1.38-3.8 3.92v2.19H8v2.96h2.46V21h3.04z"/></svg>
+        </span>
         Follow on Facebook
       </a>
-      <a href="#" id="tiktokFinalCta" target="_blank" rel="noopener" class="btn btn-outline-light">Follow on TikTok</a>
+      <span class="cta-or">or</span>
+      <a href="#" id="tiktokFinalCta" target="_blank" rel="noopener" class="btn btn-outline-light">
+        <span class="btn-icon-badge">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82c-.93-.9-1.44-2.14-1.44-3.42h-3.1v13.4c0 1.55-1.26 2.8-2.8 2.8a2.8 2.8 0 0 1-2.8-2.8 2.8 2.8 0 0 1 2.8-2.8c.28 0 .55.04.8.12v-3.15c-.26-.03-.53-.05-.8-.05-2.98 0-5.4 2.42-5.4 5.4s2.42 5.4 5.4 5.4 5.4-2.42 5.4-5.4V9.28a7.9 7.9 0 0 0 4.6 1.47v-3.1c-1 0-1.98-.34-2.66-.83z"/></svg>
+        </span>
+        Follow on TikTok
+      </a>
     </div>
+    <p class="cta-microcopy">Usually replies within a few hours </p>
   </div>
 </section>
 
@@ -1016,6 +1042,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
           <div class="field"><label>Caption (optional)</label><input type="text" id="fCaption" placeholder="e.g. Fahmida, Dhaka"></div>
           <button type="submit" class="btn btn-primary form-submit">Add Review</button>
         </form>
+        <div class="admin-note" style="margin-top:18px;">
+          <b>"Happy Customers" number on your homepage:</b> by default it shows how many reviews you've added below. If your real count is higher than the screenshots you have time to upload, you can set the number shown here manually — it won't be tied to the reviews list.
+        </div>
+        <div class="field">
+          <label>Happy Customers count to display</label>
+          <input type="number" id="fHappyOverride" min="0" placeholder="Leave blank to auto-count reviews below">
+        </div>
         <div class="admin-list"><h4>Current reviews</h4><div id="feedbackList"></div></div>
       </div>
 
@@ -1122,9 +1155,13 @@ const GH_SETTINGS_KEY = "velvetvibe_gh_settings"; // owner/repo/branch only — 
 function loadState(){
   try{
     const raw = localStorage.getItem(LS_KEY);
-    if(raw) return JSON.parse(raw);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      if(!parsed.settings) parsed.settings = {};
+      return parsed;
+    }
   }catch(e){}
-  return { products: SEED_PRODUCTS.slice(), offers: SEED_OFFERS.slice(), feedback: SEED_FEEDBACK.slice() };
+  return { products: SEED_PRODUCTS.slice(), offers: SEED_OFFERS.slice(), feedback: SEED_FEEDBACK.slice(), settings: {} };
 }
 function saveState(){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
 let state = loadState();
@@ -1209,7 +1246,7 @@ function ghPathFromRawUrl(url){
   return url && url.startsWith(prefix) ? url.slice(prefix.length) : null;
 }
 async function ghPublishData(message){
-  const json = JSON.stringify({ products: state.products, offers: state.offers, feedback: state.feedback }, null, 2);
+  const json = JSON.stringify({ products: state.products, offers: state.offers, feedback: state.feedback, settings: state.settings || {} }, null, 2);
   await ghPutFile("data.json", utf8ToBase64(json), message);
 }
 async function ghUploadImage(dataUrl, folder, id){
@@ -1253,7 +1290,7 @@ async function tryLoadPublicData(){
     if(!res.ok) return; // not published yet — keep local/seed data
     const data = await res.json();
     if(data && Array.isArray(data.products)){
-      state = { products:data.products, offers:data.offers||[], feedback:data.feedback||[] };
+      state = { products:data.products, offers:data.offers||[], feedback:data.feedback||[], settings:data.settings||{} };
       renderVeins(); renderCategories(); renderOffers(); renderProducts(); renderFeedback();
     }
   }catch(e){ /* offline or not published — silently keep what we have */ }
@@ -1574,7 +1611,11 @@ function renderProducts(){
    ============================================================ */
 function renderFeedback(){
   const grid = document.getElementById("tmGrid");
-  document.getElementById("statReviews").textContent = state.feedback.length + "+";
+  const override = state.settings && state.settings.happyCustomersOverride;
+  const displayCount = (override !== undefined && override !== null && override !== "")
+    ? override
+    : state.feedback.length;
+  document.getElementById("statReviews").textContent = displayCount + "+";
   let html = state.feedback.map(f => `
     <div class="tm-card" data-id="${f.id}">
       <button class="tm-remove" data-remove-feedback="${f.id}" aria-label="Remove review">
@@ -1854,6 +1895,26 @@ document.getElementById("feedbackForm").addEventListener("submit", async e=>{
   renderFeedback(); refreshAdminLists();
 });
 
+document.getElementById("fHappyOverride").addEventListener("change", async e=>{
+  const raw = e.target.value.trim();
+  if(!state.settings) state.settings = {};
+  if(raw === ""){
+    delete state.settings.happyCustomersOverride;
+  }else{
+    const num = Math.max(0, parseInt(raw, 10) || 0);
+    state.settings.happyCustomersOverride = num;
+    e.target.value = num;
+  }
+  saveState();
+  renderFeedback();
+  if(ghConnected()){
+    try{ await ghPublishData("Update happy customers count"); toast("Published live ✓"); }
+    catch(err){ toast("Saved locally — publish failed: "+err.message); }
+  }else{
+    toast("Saved ✓ (local preview — connect GitHub to publish)");
+  }
+});
+
 /* ============================================================
    ADMIN — LISTS (with delete buttons) inside drawer
    ============================================================ */
@@ -1906,6 +1967,11 @@ async function removeFeedback(id){
   }
 }
 function refreshAdminLists(){
+  const happyInput = document.getElementById("fHappyOverride");
+  if(happyInput && document.activeElement !== happyInput){
+    const ov = state.settings && state.settings.happyCustomersOverride;
+    happyInput.value = (ov === undefined || ov === null) ? "" : ov;
+  }
   document.getElementById("productList").innerHTML = state.products.map(p => `
     <div class="admin-row">
       ${p.img ? `<img class="thumb" src="${p.img}">` : `<div class="thumb"></div>`}
@@ -1962,7 +2028,7 @@ document.getElementById("copyExportBtn").addEventListener("click", ()=>{
 document.getElementById("resetBtn").addEventListener("click", async ()=>{
   if(!confirm("This will erase everything you've added and restore the sample content" + (ghConnected() ? " — including on your live GitHub site" : "") + ". Continue?")) return;
   localStorage.removeItem(LS_KEY);
-  state = { products: SEED_PRODUCTS.slice(), offers: SEED_OFFERS.slice(), feedback: SEED_FEEDBACK.slice() };
+  state = { products: SEED_PRODUCTS.slice(), offers: SEED_OFFERS.slice(), feedback: SEED_FEEDBACK.slice(), settings: {} };
   saveState();
   renderOffers(); renderProducts(); renderFeedback(); refreshAdminLists();
   if(ghConnected()){
