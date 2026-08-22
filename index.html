@@ -1,4 +1,7 @@
-<!-- HAR HAR MAHADEV --><!DOCTYPE html>
+<!-- HAR HAR MAHADEV -->
+<!-- HAR HAR MAHADEV -->
+<!-- OM NAMAH BHAGABATE RUDRAY NAMOH -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -568,6 +571,107 @@ nav.main-nav a:hover::after{width:100%;}
 }
 
 /* ============================================================
+   PROFILE — "Meet the Maker" (elegant, editorial, gold-on-plum)
+   ============================================================ */
+.profile-section{
+  position:relative; overflow:hidden;
+  padding:96px 20px 104px;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(201,162,76,0.16), transparent 42%),
+    radial-gradient(circle at 84% 88%, rgba(201,162,76,0.14), transparent 38%),
+    linear-gradient(165deg, #2A1620 0%, #3A1F2B 55%, #2A1620 100%);
+  text-align:center;
+  color:#fff;
+}
+.profile-section::before{
+  content:'';
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(circle, #F6C445 0.8px, transparent 1.2px) 24px 18px/86px 86px repeat,
+    radial-gradient(circle, #E8CE8E 0.8px, transparent 1.2px) 60px 54px/110px 110px repeat;
+  opacity:0.22;
+}
+.profile-section::after{
+  content:'';
+  position:absolute; left:50%; top:0; transform:translateX(-50%);
+  width:1px; height:64px;
+  background:linear-gradient(180deg, transparent, var(--gold-light) 60%, transparent);
+  opacity:0.5;
+}
+.profile-inner{position:relative; z-index:2; max-width:600px; margin:0 auto;}
+.profile-photo-wrap{position:relative; width:152px; height:152px; margin:0 auto 44px;}
+.profile-photo-halo{
+  position:absolute; inset:-30px; border-radius:50%; pointer-events:none;
+  background:radial-gradient(circle, rgba(212,175,110,0.28), rgba(212,175,110,0) 70%);
+}
+.profile-photo-outer-ring{
+  position:absolute; inset:-14px; border-radius:50%; pointer-events:none;
+  border:1px solid rgba(232,206,142,0.38);
+}
+.profile-photo-frame{
+  position:relative; z-index:1; width:100%; height:100%; border-radius:50%; padding:3.5px;
+  background:radial-gradient(circle at 30% 26%, #FFFBF0 0%, #F6E4AE 16%, #E8CE8E 32%, #C9A24C 54%, #A67C2E 70%, #C9A24C 86%, #E8CE8E 100%);
+  box-shadow:0 18px 40px rgba(0,0,0,0.5);
+  overflow:hidden;
+}
+.profile-photo-frame::before{
+  content:'';
+  position:absolute; inset:0; border-radius:50%;
+  background:linear-gradient(115deg, transparent 32%, rgba(255,255,255,0.65) 48%, transparent 64%);
+  background-size:260% 260%;
+  mix-blend-mode:screen; pointer-events:none;
+  animation:profShine 7s ease-in-out infinite;
+}
+@keyframes profShine{
+  0%{ background-position:-60% -60%; }
+  50%{ background-position:160% 160%; }
+  100%{ background-position:-60% -60%; }
+}
+.profile-photo{
+  position:relative; width:100%; height:100%; border-radius:50%; object-fit:cover; display:block;
+  background:var(--blush); border:1px solid rgba(26,13,18,0.4);
+}
+.profile-photo-edit{
+  display:none; position:absolute; right:-8px; bottom:-8px; z-index:3;
+  width:36px; height:36px; border-radius:50%; border:2px solid #2A1620;
+  background:linear-gradient(145deg, var(--gold-light), var(--gold-deep));
+  color:#2A1620; align-items:center; justify-content:center; cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,0.35); transition:transform .2s ease;
+}
+.profile-photo-edit:hover{transform:scale(1.08);}
+.admin-on .profile-photo-edit{display:flex;}
+.profile-eyebrow{
+  color:var(--gold-light); background:rgba(255,255,255,0.06);
+  padding:6px 16px; border-radius:100px; backdrop-filter:blur(3px);
+}
+.profile-name{
+  font-family:var(--ff-display); font-style:italic; font-weight:600;
+  font-size:clamp(28px,4.4vw,40px); letter-spacing:.3px; margin:6px 0 18px;
+  background:linear-gradient(135deg, var(--gold-light), #fff 45%, var(--gold-light));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+.profile-flourish{
+  display:flex; align-items:center; justify-content:center; gap:12px;
+  margin:0 0 22px; color:var(--gold-light); opacity:.85;
+}
+.profile-flourish::before, .profile-flourish::after{
+  content:''; width:46px; height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold-light));
+}
+.profile-flourish::after{background:linear-gradient(90deg, var(--gold-light), transparent);}
+.profile-bio{
+  font-family:var(--ff-display); font-style:italic; font-weight:500;
+  font-size:clamp(17px,2.2vw,20px); line-height:1.85; color:rgba(255,255,255,0.92);
+  max-width:480px; margin:0 auto;
+}
+.profile-signature{
+  margin-top:34px; font-family:var(--ff-display); font-style:italic; font-weight:600;
+  font-size:22px; letter-spacing:1px; color:var(--gold-light);
+}
+.profile-signature span{display:block; margin-top:6px; font-family:var(--ff-body); font-style:normal;
+  font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,0.55); font-weight:500;}
+
+/* ============================================================
    FOOTER — light, warm, on-brand
    ============================================================ */
 footer{
@@ -901,7 +1005,32 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   </div>
 </section>
 
-<div class="vein-divider" id="veinCtaFooter" style="--vd-from:#5a2c3f; --vd-to:#FBE3E8;"></div>
+<div class="vein-divider" id="veinCtaProfile" style="--vd-from:#DE8C9B; --vd-to:#2A1620;"></div>
+
+<!-- ============================================================
+     PROFILE — Meet the Maker
+     ============================================================ -->
+<section class="profile-section" id="profile">
+  <div class="profile-inner">
+    <div class="profile-photo-wrap" id="profilePhotoWrap">
+      <div class="profile-photo-halo"></div>
+      <div class="profile-photo-outer-ring"></div>
+      <div class="profile-photo-frame">
+        <img class="profile-photo" id="profilePhotoImg" src="" alt="Founder of Vel Vet Vibe">
+      </div>
+      <button class="profile-photo-edit" id="profilePhotoEditBtn" aria-label="Change photo" title="Change photo">
+        <svg class="icon" style="width:16px;height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+      </button>
+    </div>
+    <span class="eyebrow profile-eyebrow">Meet the Maker</span>
+    <h2 class="profile-name" id="profileNameText">Founder, Vel Vet Vibe</h2>
+    <div class="profile-flourish">✦</div>
+    <p class="profile-bio" id="profileBioText"></p>
+    <div class="profile-signature">Vel Vet Vibe<span>Handpicked · Handled With Love</span></div>
+  </div>
+</section>
+
+<div class="vein-divider" id="veinCtaFooter" style="--vd-from:#2A1620; --vd-to:#FBE3E8;"></div>
 
 <!-- ============================================================
      FOOTER
@@ -980,6 +1109,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
       <button class="dtab active" data-tab="products">Products</button>
       <button class="dtab" data-tab="offers">Offers</button>
       <button class="dtab" data-tab="feedback">Reviews</button>
+      <button class="dtab" data-tab="profile">Profile</button>
       <button class="dtab" data-tab="publish">Publish</button>
       <button class="dtab" data-tab="export">Export</button>
     </div>
@@ -1050,6 +1180,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
           <input type="number" id="fHappyOverride" min="0" placeholder="Leave blank to auto-count reviews below">
         </div>
         <div class="admin-list"><h4>Current reviews</h4><div id="feedbackList"></div></div>
+      </div>
+
+      <!-- Profile panel — "Meet the Maker" section -->
+      <div class="dpanel" id="panel-profile">
+        <div class="admin-note">This is the "Meet the Maker" section shown just above your footer. Add a photo of yourself, your title, and a short personal note — this is what makes customers trust the woman behind the page.</div>
+        <form id="profileForm">
+          <div class="field"><label>Photo</label><input type="file" id="proImage" accept="image/*">
+            <div class="upload-preview" id="proImagePreview"><img alt=""></div>
+          </div>
+          <div class="field"><label>Title</label><input type="text" id="proTitle" placeholder="e.g. Founder, Vel Vet Vibe"></div>
+          <div class="field"><label>Short note to customers</label><textarea id="proBio" placeholder="e.g. আমি চাই, প্রতিটি মেয়ের সাজে একটু কমনীয়তা ছুঁয়ে যাক।"></textarea></div>
+          <button type="submit" class="btn btn-primary form-submit">Save Profile</button>
+        </form>
       </div>
 
       <!-- Publish panel — GitHub auto-sync -->
@@ -1277,6 +1420,9 @@ async function migrateLocalImagesToGithub(){
   for(const f of state.feedback){
     if(isBase64(f.img)) f.img = await ghUploadImage(f.img, "feedback", f.id);
   }
+  if(state.settings && isBase64(state.settings.profileImg)){
+    state.settings.profileImg = await ghUploadImage(state.settings.profileImg, "profile", "owner");
+  }
   saveState();
 }
 
@@ -1291,7 +1437,7 @@ async function tryLoadPublicData(){
     const data = await res.json();
     if(data && Array.isArray(data.products)){
       state = { products:data.products, offers:data.offers||[], feedback:data.feedback||[], settings:data.settings||{} };
-      renderVeins(); renderCategories(); renderOffers(); renderProducts(); renderFeedback();
+      renderVeins(); renderCategories(); renderOffers(); renderProducts(); renderFeedback(); renderProfile();
     }
   }catch(e){ /* offline or not published — silently keep what we have */ }
 }
@@ -1648,6 +1794,25 @@ function fallbackFeedbackImg(){
   `);
 }
 
+/* ============================================================
+   RENDER: PROFILE ("Meet the Maker")
+   ============================================================ */
+const DEFAULT_PROFILE_BIO = "আমি চাই, প্রতিটি মেয়ের সাজে একটু কমনীয়তা ছুঁয়ে যাক। ভালোবেসে বেছে নিই প্রতিটি গয়না — কারণ সাজেই লুকিয়ে থাকে একটি মেয়ের আত্মবিশ্বাস।";
+function fallbackProfileImg(){
+  return "data:image/svg+xml;utf8," + encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="200" height="200" fill="#F6D3DB"/><circle cx="100" cy="80" r="34" fill="#C15C77" opacity="0.55"/><ellipse cx="100" cy="176" rx="62" ry="46" fill="#C15C77" opacity="0.55"/></svg>
+  `);
+}
+function renderProfile(){
+  const s = state.settings || {};
+  const imgEl = document.getElementById("profilePhotoImg");
+  if(imgEl) imgEl.src = s.profileImg || fallbackProfileImg();
+  const nameEl = document.getElementById("profileNameText");
+  if(nameEl) nameEl.textContent = (s.profileTitle && s.profileTitle.trim()) || "Founder, Vel Vet Vibe";
+  const bioEl = document.getElementById("profileBioText");
+  if(bioEl) bioEl.textContent = (s.profileBio && s.profileBio.trim()) || DEFAULT_PROFILE_BIO;
+}
+
 function applyAdminClass(){ document.body.classList.toggle("admin-on", isAdmin); }
 
 /* ============================================================
@@ -1916,6 +2081,53 @@ document.getElementById("fHappyOverride").addEventListener("change", async e=>{
 });
 
 /* ============================================================
+   ADMIN — PROFILE FORM ("Meet the Maker")
+   ============================================================ */
+let pendingProfileImg = "";
+document.getElementById("proImage").addEventListener("change", async e=>{
+  const file = e.target.files[0]; if(!file) return;
+  pendingProfileImg = await compressImage(file);
+  const prev = document.getElementById("proImagePreview");
+  prev.querySelector("img").src = pendingProfileImg;
+  prev.classList.add("show");
+});
+document.getElementById("profilePhotoEditBtn").addEventListener("click", ()=>{
+  openAdminTab("profile");
+  setTimeout(()=> document.getElementById("proImage").click(), 250);
+});
+document.getElementById("profileForm").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const submitBtn = e.target.querySelector("button[type=submit]");
+  if(!state.settings) state.settings = {};
+  const title = document.getElementById("proTitle").value.trim();
+  const bio = document.getElementById("proBio").value.trim();
+  state.settings.profileTitle = title;
+  state.settings.profileBio = bio;
+  const newImg = pendingProfileImg || state.settings.profileImg || "";
+  state.settings.profileImg = newImg;
+  submitBtn.disabled = true;
+  if(ghConnected()){
+    try{
+      if(pendingProfileImg){ toast("Uploading photo..."); state.settings.profileImg = await ghUploadImage(pendingProfileImg, "profile", "owner"); }
+      saveState();
+      toast("Updating profile...");
+      await ghPublishData("Update profile section");
+      toast("Published live ✓");
+    }catch(err){
+      saveState();
+      toast("Saved locally — publish failed: "+err.message);
+    }
+  }else{
+    saveState();
+    toast("Profile saved ✓ (local preview — connect GitHub to publish)");
+  }
+  submitBtn.disabled = false;
+  pendingProfileImg = "";
+  document.getElementById("proImagePreview").classList.remove("show");
+  renderProfile();
+});
+
+/* ============================================================
    ADMIN — LISTS (with delete buttons) inside drawer
    ============================================================ */
 async function removeProduct(id){
@@ -1971,6 +2183,20 @@ function refreshAdminLists(){
   if(happyInput && document.activeElement !== happyInput){
     const ov = state.settings && state.settings.happyCustomersOverride;
     happyInput.value = (ov === undefined || ov === null) ? "" : ov;
+  }
+  const s = state.settings || {};
+  const proTitleInput = document.getElementById("proTitle");
+  if(proTitleInput && document.activeElement !== proTitleInput){
+    proTitleInput.value = s.profileTitle || "";
+  }
+  const proBioInput = document.getElementById("proBio");
+  if(proBioInput && document.activeElement !== proBioInput){
+    proBioInput.value = s.profileBio || "";
+  }
+  const proPreview = document.getElementById("proImagePreview");
+  if(proPreview && s.profileImg && !pendingProfileImg){
+    proPreview.querySelector("img").src = s.profileImg;
+    proPreview.classList.add("show");
   }
   document.getElementById("productList").innerHTML = state.products.map(p => `
     <div class="admin-row">
@@ -2030,7 +2256,7 @@ document.getElementById("resetBtn").addEventListener("click", async ()=>{
   localStorage.removeItem(LS_KEY);
   state = { products: SEED_PRODUCTS.slice(), offers: SEED_OFFERS.slice(), feedback: SEED_FEEDBACK.slice(), settings: {} };
   saveState();
-  renderOffers(); renderProducts(); renderFeedback(); refreshAdminLists();
+  renderOffers(); renderProducts(); renderFeedback(); renderProfile(); refreshAdminLists();
   if(ghConnected()){
     try{ toast("Publishing reset..."); await ghPublishData("Reset to sample data"); toast("Reset & published ✓"); }
     catch(err){ toast("Reset locally — publish failed: "+err.message); }
@@ -2076,7 +2302,7 @@ document.getElementById("ghConnectBtn").addEventListener("click", async ()=>{
     await migrateLocalImagesToGithub();
     toast("Publishing catalog...");
     await ghPublishData("Initial publish from Manage Site");
-    renderProducts(); renderOffers(); renderFeedback(); refreshAdminLists();
+    renderProducts(); renderOffers(); renderFeedback(); renderProfile(); refreshAdminLists();
     toast("Published live ✓ Everyone can now see your catalog");
   }catch(err){
     ghDisconnect();
@@ -2102,6 +2328,7 @@ renderCategories();
 renderOffers();
 renderProducts();
 renderFeedback();
+renderProfile();
 refreshGhStatusUI();
 tryLoadPublicData();
 
