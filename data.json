@@ -1,6 +1,15 @@
 {
   "products": [
     {
+      "id": "pmt5g1fasqmmd",
+      "name": "olive-blue kashmiri churi",
+      "category": "Churi",
+      "price": 299,
+      "desc": "all size available",
+      "badge": "New",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/products/pmt5g1fasqmmd.jpg"
+    },
+    {
       "id": "pmsr0zwhijudu",
       "name": "কাশ্মীরি চুড়ি সেট",
       "category": "Churi",
@@ -128,6 +137,7 @@
   "settings": {
     "profileTitle": "",
     "profileBio": "",
-    "profileImg": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/profile/owner.jpg"
+    "profileImg": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/profile/owner.jpg",
+    "happyCustomersOverride": 1200
   }
 }
