@@ -1,6 +1,15 @@
 {
   "products": [
     {
+      "id": "pmt5g85d478vr",
+      "name": "Kashmiri churi-crystal blue",
+      "category": "Churi",
+      "price": 260,
+      "desc": "with runujhunu-299Tk",
+      "badge": "New",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/products/pmt5g85d478vr.jpg"
+    },
+    {
       "id": "pmt5g1fasqmmd",
       "name": "olive-blue kashmiri churi",
       "category": "Churi",
