@@ -98,6 +98,11 @@
   ],
   "feedback": [
     {
+      "id": "fmt5dswvfoca9",
+      "caption": "",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/feedback/fmt5dswvfoca9.jpg"
+    },
+    {
       "id": "fmsqbndx6wsky",
       "caption": "",
       "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/feedback/fmsqbndx6wsky.jpg"
@@ -113,5 +118,9 @@
       "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/feedback/fmsqbmueu70ld.jpg"
     }
   ],
-  "settings": {}
+  "settings": {
+    "profileTitle": "",
+    "profileBio": "",
+    "profileImg": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/profile/owner.jpg"
+  }
 }
