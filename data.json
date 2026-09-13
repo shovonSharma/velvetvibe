@@ -1,6 +1,24 @@
 {
   "products": [
     {
+      "id": "pmu05k4bev8a5",
+      "name": "Indian Earrings",
+      "category": "Earrings",
+      "price": 199,
+      "desc": "কালার গ্যারান্টি",
+      "badge": "New",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/products/pmu05k4bev8a5.jpg"
+    },
+    {
+      "id": "pmu05jgreql25",
+      "name": "Indian Earrings",
+      "category": "Earrings",
+      "price": 199,
+      "desc": "কালার গ্যারান্টি",
+      "badge": "New",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/products/pmu05jgreql25.jpg"
+    },
+    {
       "id": "pmu04y2bqo7mn",
       "name": "Indian Earrings",
       "category": "Earrings",
