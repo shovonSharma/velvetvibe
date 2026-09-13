@@ -19,15 +19,6 @@
       "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/products/pmt5g1fasqmmd.jpg"
     },
     {
-      "id": "pmsr0zwhijudu",
-      "name": "কাশ্মীরি চুড়ি সেট",
-      "category": "Churi",
-      "price": 1999,
-      "desc": "set of 72",
-      "badge": "New",
-      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/products/pmsr0zwhijudu.jpg"
-    },
-    {
       "id": "pmsqfgcbvlbc5",
       "name": "Metal Jhumka",
       "category": "Earrings",
@@ -98,6 +89,13 @@
       "sub": "This is exactly what i want 💖",
       "badge": "999Tk",
       "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/offers/omsqblujpnfc2.jpg"
+    },
+    {
+      "id": "omsqc3s3a73hb",
+      "title": "Kashmiri set",
+      "sub": "",
+      "badge": "1999Tk",
+      "img": "https://raw.githubusercontent.com/shovonSharma/velvetvibe/main/assets/offers/omsqc3s3a73hb.jpg"
     },
     {
       "id": "omt5fvuqlvs6g",
