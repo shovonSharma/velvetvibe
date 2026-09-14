@@ -1,6 +1,15 @@
 {
   "products": [
     {
+      "id": "pmu1a5p9dokba",
+      "name": "সবুজ পরি কাশ্মীরি চুড়ি",
+      "category": "Churi",
+      "price": 249,
+      "desc": "হাতে কাশ্মীরি চুড়ি, সাজে আসুক রাজকীয় ছোঁয়া! 💖",
+      "badge": "",
+      "img": "https://cdn.jsdelivr.net/gh/shovonSharma/velvetvibe@main/assets/products/pmu1a5p9dokba.jpg"
+    },
+    {
       "id": "pmu0rg7v8rrk1",
       "name": "Kaviri Churi",
       "category": "Churi",
