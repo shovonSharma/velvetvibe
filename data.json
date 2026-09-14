@@ -1,6 +1,15 @@
 {
   "products": [
     {
+      "id": "pmu1g3wr8nnhv",
+      "name": "Necklace GREEN",
+      "category": "Neck Chains",
+      "price": 499,
+      "desc": "শাড়ি আর গলার হার — perfect combo 🤍",
+      "badge": "New",
+      "img": "https://cdn.jsdelivr.net/gh/shovonSharma/velvetvibe@main/assets/products/pmu1g3wr8nnhv.jpg"
+    },
+    {
       "id": "pmu1g10zxk5kw",
       "name": "Necklace PINK",
       "category": "Neck Chains",
