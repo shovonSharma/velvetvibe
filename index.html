@@ -1,6 +1,6 @@
-<!-- OM NAMO BHAGAWATE RUDRAY NAMAH -->
-<!-- I want to marry her, MAHADEV -->
-<!-- OM NAMO BHAGWATE  RUDRAY NAMAH -->
+<!-- OM NAMO BHAGWATE RUDRAY NAMAH -->
+<!-- I want to marry MOhona, Ma Kali -->
+<!-- OM NAMO BHAGWATE RUDRAY NAMAH -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1298,6 +1298,12 @@ const SEED_FEEDBACK = [
    ============================================================ */
 const LS_KEY = "velvetvibe_data_v1";
 const GH_SETTINGS_KEY = "velvetvibe_gh_settings"; // owner/repo/branch only — never the token
+const LS_LAST_PUBLISH_KEY = "velvetvibe_last_publish"; // when THIS browser last successfully published
+// How long after a successful publish we trust our own local copy over a freshly-fetched
+// remote one. jsDelivr's cache purge is best-effort and can lag a few minutes, so without
+// this guard a refresh right after saving can pull back stale data and look like the
+// edit/delete "didn't work" even though it published correctly.
+const PUBLISH_TRUST_WINDOW_MS = 5 * 60 * 1000;
 function loadState(){
   try{
     const raw = localStorage.getItem(LS_KEY);
@@ -1336,6 +1342,7 @@ function ghSaveSettings(owner, repo, branch){
 function ghDisconnect(){
   localStorage.removeItem(GH_SETTINGS_KEY);
   localStorage.removeItem("vv_gh_token");
+  localStorage.removeItem(LS_LAST_PUBLISH_KEY);
 }
 function utf8ToBase64(str){ return btoa(unescape(encodeURIComponent(str))); }
 function base64ToUtf8(str){ return decodeURIComponent(escape(atob(str))); }
@@ -1429,6 +1436,9 @@ async function ghPublishData(message){
   const json = JSON.stringify({ products: state.products, offers: state.offers, feedback: state.feedback, settings: state.settings || {} }, null, 2);
   await ghPutFile("data.json", utf8ToBase64(json), message);
   await ghPurgeCdn("data.json"); // make the change visible to every visitor right away, not in ~5-10 min
+  // Remember that THIS browser has the freshest possible copy, so a refresh in the next
+  // few minutes doesn't get clobbered by a CDN edge that hasn't picked up the purge yet.
+  localStorage.setItem(LS_LAST_PUBLISH_KEY, String(Date.now()));
 }
 async function ghUploadImage(dataUrl, folder, id){
   const match = /^data:image\/(\w+);base64,(.*)$/.exec(dataUrl);
@@ -1475,7 +1485,15 @@ async function migrateLocalImagesToGithub(){
 async function tryLoadPublicData(){
   const s = ghSettings();
   if(!s || !s.owner || !s.repo) return;
-  const urls = [ghPublicUrl("data.json"), ghRawUrl("data.json") + `?t=${Date.now()}`];
+  // If THIS browser just published, our in-memory/local state is already the freshest
+  // copy there is — a remote fetch right now can only pull back a stale CDN edge and make
+  // a successful save look reverted. Skip the overwrite for a short trust window.
+  const lastPublish = parseInt(localStorage.getItem(LS_LAST_PUBLISH_KEY) || "0", 10);
+  if(lastPublish && (Date.now() - lastPublish) < PUBLISH_TRUST_WINDOW_MS) return;
+  // Cache-busted raw.githubusercontent.com first (query string forces a fresh origin read),
+  // jsDelivr as a fallback — jsDelivr is great for scale but its purge-after-publish is
+  // best-effort, so it's more likely to still be serving an old copy.
+  const urls = [ghRawUrl("data.json") + `?t=${Date.now()}`, ghPublicUrl("data.json")];
   for(const url of urls){
     try{
       const res = await fetch(url, { cache: "no-store" });
