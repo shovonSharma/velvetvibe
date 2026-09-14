@@ -1,21 +1,12 @@
 {
   "products": [
     {
-      "id": "pmu11suh59asz",
-      "name": "সবুজ পরি কাশ্মীরি চুড়ি",
-      "category": "Churi",
-      "price": 450,
-      "desc": "হাতে কাশ্মীরি চুড়ি, সাজে আসুক রাজকীয় ছোঁয়া! 💖",
-      "badge": "Bestseller",
-      "img": "https://cdn.jsdelivr.net/gh/shovonSharma/velvetvibe@main/assets/products/pmu11suh59asz.jpg"
-    },
-    {
       "id": "pmu0rg7v8rrk1",
-      "name": "মাল্টি কালার কাশ্মীরি চুড়ি",
+      "name": "Kaviri Churi",
       "category": "Churi",
-      "price": 249,
-      "desc": "এক চুড়িতেই রঙের মেলা!",
-      "badge": "Bestseller",
+      "price": 299,
+      "desc": "চুড়ির ঝনঝন শব্দেই যখন সাজটা হয়ে ওঠে আরও সুন্দর!",
+      "badge": "New",
       "img": "https://cdn.jsdelivr.net/gh/shovonSharma/velvetvibe@main/assets/products/pmu0rg7v8rrk1.jpg"
     },
     {
@@ -37,11 +28,20 @@
       "img": "https://cdn.jsdelivr.net/gh/shovonSharma/velvetvibe@main/assets/products/pmu0r351hdp7a.jpg"
     },
     {
-      "id": "pmu0qbtwp4bvw",
-      "name": "Kaviri Churi",
+      "id": "pmu0qx0ct7g63",
+      "name": "সবুজ পরি কাশ্মীরি চুড়ি",
       "category": "Churi",
-      "price": 299,
-      "desc": "চুড়ির ঝনঝন শব্দেই যখন সাজটা হয়ে ওঠে আরও সুন্দর!",
+      "price": 259,
+      "desc": "হাতে কাশ্মীরি চুড়ি, সাজে আসুক রাজকীয় ছোঁয়া! 💖",
+      "badge": "Bestseller",
+      "img": "https://cdn.jsdelivr.net/gh/shovonSharma/velvetvibe@main/assets/products/pmu0qx0ct7g63.jpg"
+    },
+    {
+      "id": "pmu0qbtwp4bvw",
+      "name": "Neckpiece Blue Love",
+      "category": "Neck Chains",
+      "price": 149,
+      "desc": "Indian Colour Guarantee",
       "badge": "Bestseller",
       "img": "https://cdn.jsdelivr.net/gh/shovonSharma/velvetvibe@main/assets/products/pmu0qbtwp4bvw.jpg"
     },
