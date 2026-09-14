@@ -1,6 +1,15 @@
 {
   "products": [
     {
+      "id": "pmu1fubcfqb1k",
+      "name": "Neck Piece L",
+      "category": "Neck Chains",
+      "price": 149,
+      "desc": "যে কোনো outfit-এর সাথে একদম classy & elegant look!",
+      "badge": "New",
+      "img": "https://cdn.jsdelivr.net/gh/shovonSharma/velvetvibe@main/assets/products/pmu1fubcfqb1k.jpg"
+    },
+    {
       "id": "pmu1frez86og6",
       "name": "Neck Piece U",
       "category": "Neck Chains",
