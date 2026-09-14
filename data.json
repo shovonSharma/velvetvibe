@@ -1,6 +1,15 @@
 {
   "products": [
     {
+      "id": "pmu1ey9mzpohj",
+      "name": "কাশ্মীরি চুড়ি - রঙের মেলা",
+      "category": "Churi",
+      "price": 249,
+      "desc": "রঙের সুন্দর কম্বিনেশন আর এলিগেন্ট লুক—মেয়েরা স্কিপ করতে পারবে না!",
+      "badge": "Bestseller",
+      "img": "https://cdn.jsdelivr.net/gh/shovonSharma/velvetvibe@main/assets/products/pmu1ey9mzpohj.jpg"
+    },
+    {
       "id": "pmu1a5p9dokba",
       "name": "সবুজ পরি কাশ্মীরি চুড়ি",
       "category": "Churi",
