@@ -1,6 +1,15 @@
 {
   "products": [
     {
+      "id": "pmu0r351hdp7a",
+      "name": "হলুদ পরি কাশ্মীরি চুড়ি",
+      "category": "Churi",
+      "price": 259,
+      "desc": "Every girl Dreamy kasmiri churi ✨💖",
+      "badge": "Bestseller",
+      "img": "https://cdn.jsdelivr.net/gh/shovonSharma/velvetvibe@main/assets/products/pmu0r351hdp7a.jpg"
+    },
+    {
       "id": "pmu0qx0ct7g63",
       "name": "Neck Piece",
       "category": "Neck Chains",
