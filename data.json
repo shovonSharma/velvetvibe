@@ -1,6 +1,15 @@
 {
   "products": [
     {
+      "id": "pmu1fy8mx4ogi",
+      "name": "Necklace RED",
+      "category": "Neck Chains",
+      "price": 399,
+      "desc": "Simple হার, classy look 😌",
+      "badge": "New",
+      "img": "https://cdn.jsdelivr.net/gh/shovonSharma/velvetvibe@main/assets/products/pmu1fy8mx4ogi.jpg"
+    },
+    {
       "id": "pmu1fubcfqb1k",
       "name": "Neck Piece L",
       "category": "Neck Chains",
