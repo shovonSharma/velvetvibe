@@ -1,6 +1,15 @@
 {
   "products": [
     {
+      "id": "pmu1g10zxk5kw",
+      "name": "Necklace PINK",
+      "category": "Neck Chains",
+      "price": 399,
+      "desc": "হারটা ছোট হলেও সৌন্দর্যটা অনেক বড়!",
+      "badge": "New",
+      "img": "https://cdn.jsdelivr.net/gh/shovonSharma/velvetvibe@main/assets/products/pmu1g10zxk5kw.jpg"
+    },
+    {
       "id": "pmu1fy8mx4ogi",
       "name": "Necklace RED",
       "category": "Neck Chains",
