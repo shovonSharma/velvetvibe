@@ -1,6 +1,15 @@
 {
   "products": [
     {
+      "id": "pmu0rc1vn0883",
+      "name": "লাল পরি কাশ্মীরি চুড়ি",
+      "category": "Churi",
+      "price": 249,
+      "desc": "Every girl Dreamy kashmiri Churi!",
+      "badge": "Bestseller",
+      "img": "https://cdn.jsdelivr.net/gh/shovonSharma/velvetvibe@main/assets/products/pmu0rc1vn0883.jpg"
+    },
+    {
       "id": "pmu0r351hdp7a",
       "name": "হলুদ পরি কাশ্মীরি চুড়ি",
       "category": "Churi",
