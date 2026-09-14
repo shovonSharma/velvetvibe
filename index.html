@@ -1,5 +1,5 @@
-<!-- OM NAMO BHAGWATE RUDRAY NAMAH -->
-<!-- MAHADEV, I want to marry her -->
+<!-- OM NAMAH BHAGWATE RUDRAY NAMAH -->
+<!-- I want to marry her -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1396,14 +1396,35 @@ function ghRawUrl(path){
   const s = ghSettings();
   return `https://raw.githubusercontent.com/${s.owner}/${s.repo}/${s.branch}/${path}`;
 }
+// jsDelivr mirrors GitHub repos and — unlike raw.githubusercontent.com — has a public
+// endpoint we can call to force it to drop its cached copy of a file immediately.
+// raw.githubusercontent.com has NO such mechanism: it sits behind a CDN that can hold
+// a stale copy for several minutes with nothing you can do to force a refresh, which is
+// exactly the "works on my screen, not for anyone else yet" symptom. Public reads (what
+// customers' browsers load) now go through jsDelivr; we purge it right after every publish.
+function ghPublicUrl(path){
+  const s = ghSettings();
+  return `https://cdn.jsdelivr.net/gh/${s.owner}/${s.repo}@${s.branch}/${path}`;
+}
+async function ghPurgeCdn(path){
+  const s = ghSettings();
+  if(!s) return;
+  try{ await fetch(`https://purge.jsdelivr.net/gh/${s.owner}/${s.repo}@${s.branch}/${path}`); }
+  catch(e){ /* best-effort — a failed purge just means the CDN catches up on its own schedule instead of instantly */ }
+}
 function ghPathFromRawUrl(url){
   const s = ghSettings();
-  const prefix = `https://raw.githubusercontent.com/${s.owner}/${s.repo}/${s.branch}/`;
-  return url && url.startsWith(prefix) ? url.slice(prefix.length) : null;
+  if(!url) return null;
+  const rawPrefix = `https://raw.githubusercontent.com/${s.owner}/${s.repo}/${s.branch}/`;
+  const cdnPrefix = `https://cdn.jsdelivr.net/gh/${s.owner}/${s.repo}@${s.branch}/`;
+  if(url.startsWith(rawPrefix)) return url.slice(rawPrefix.length);
+  if(url.startsWith(cdnPrefix)) return url.slice(cdnPrefix.length);
+  return null;
 }
 async function ghPublishData(message){
   const json = JSON.stringify({ products: state.products, offers: state.offers, feedback: state.feedback, settings: state.settings || {} }, null, 2);
   await ghPutFile("data.json", utf8ToBase64(json), message);
+  await ghPurgeCdn("data.json"); // make the change visible to every visitor right away, not in ~5-10 min
 }
 async function ghUploadImage(dataUrl, folder, id){
   const match = /^data:image\/(\w+);base64,(.*)$/.exec(dataUrl);
@@ -1411,11 +1432,15 @@ async function ghUploadImage(dataUrl, folder, id){
   const ext = match[1] === "jpeg" ? "jpg" : match[1];
   const path = `assets/${folder}/${id}.${ext}`;
   await ghPutFile(path, match[2], `Add image: ${path}`);
-  return ghRawUrl(path);
+  await ghPurgeCdn(path);
+  return ghPublicUrl(path);
 }
 async function ghDeleteImageIfOwned(imgUrl, itemName){
   const path = ghPathFromRawUrl(imgUrl);
-  if(path) await ghDeleteFile(path, `Remove image for: ${itemName}`);
+  if(path){
+    await ghDeleteFile(path, `Remove image for: ${itemName}`);
+    await ghPurgeCdn(path);
+  }
 }
 
 // Run once when GitHub is first connected: any product/offer/review added
@@ -1441,18 +1466,25 @@ async function migrateLocalImagesToGithub(){
 
 // On load: if a repo is configured, fetch the live data.json (public, no token needed)
 // so every visitor sees the same catalog — not just this browser's local copy.
+// Tries jsDelivr first (kept fresh by ghPurgeCdn on every publish); falls back to
+// raw.githubusercontent.com if jsDelivr is ever unreachable.
 async function tryLoadPublicData(){
   const s = ghSettings();
   if(!s || !s.owner || !s.repo) return;
-  try{
-    const res = await fetch(ghRawUrl("data.json") + `?t=${Date.now()}`);
-    if(!res.ok) return; // not published yet — keep local/seed data
-    const data = await res.json();
-    if(data && Array.isArray(data.products)){
-      state = { products:data.products, offers:data.offers||[], feedback:data.feedback||[], settings:data.settings||{} };
-      renderVeins(); renderCategories(); renderOffers(); renderProducts(); renderFeedback(); renderProfile();
-    }
-  }catch(e){ /* offline or not published — silently keep what we have */ }
+  const urls = [ghPublicUrl("data.json"), ghRawUrl("data.json") + `?t=${Date.now()}`];
+  for(const url of urls){
+    try{
+      const res = await fetch(url, { cache: "no-store" });
+      if(!res.ok) continue;
+      const data = await res.json();
+      if(data && Array.isArray(data.products)){
+        state = { products:data.products, offers:data.offers||[], feedback:data.feedback||[], settings:data.settings||{} };
+        renderVeins(); renderCategories(); renderOffers(); renderProducts(); renderFeedback(); renderProfile();
+        return;
+      }
+    }catch(e){ /* try the next source */ }
+  }
+  // Neither source worked — not published yet, or both temporarily unreachable. Keep local/seed data.
 }
 
 /* ============================================================
