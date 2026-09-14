@@ -1,6 +1,5 @@
-<!-- HAR HAR MAHADEV -->
-<!-- HAR HAR MAHADEV -->
-<!-- OM NAMAH BHAGABATE RUDRAY NAMOH -->
+<!-- OM NAMO BHAGWATE RUDRAY NAMAH -->
+<!-- MAHADEV, I want to marry her -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1325,14 +1324,14 @@ function ghSettings(){
   if(GITHUB_OWNER && GITHUB_REPO) return {owner: GITHUB_OWNER, repo: GITHUB_REPO, branch: GITHUB_BRANCH || "main"};
   return null;
 }
-function ghToken(){ return sessionStorage.getItem("vv_gh_token") || ""; }
+function ghToken(){ return localStorage.getItem("vv_gh_token") || ""; }
 function ghConnected(){ const s = ghSettings(); return !!(s && s.owner && s.repo && ghToken()); }
 function ghSaveSettings(owner, repo, branch){
   localStorage.setItem(GH_SETTINGS_KEY, JSON.stringify({owner, repo, branch: branch || "main"}));
 }
 function ghDisconnect(){
   localStorage.removeItem(GH_SETTINGS_KEY);
-  sessionStorage.removeItem("vv_gh_token");
+  localStorage.removeItem("vv_gh_token");
 }
 function utf8ToBase64(str){ return btoa(unescape(encodeURIComponent(str))); }
 function base64ToUtf8(str){ return decodeURIComponent(escape(atob(str))); }
@@ -1359,13 +1358,27 @@ async function ghGetFile(path){
   const data = await res.json();
   return { sha:data.sha, content:data.content };
 }
-async function ghPutFile(path, base64Content, message){
+async function ghPutFile(path, base64Content, message, attempt){
+  attempt = attempt || 0;
   const s = ghSettings();
   const existing = await ghGetFile(path);
   const body = { message, content: base64Content, branch: s.branch };
   if(existing) body.sha = existing.sha;
   const res = await ghApi(`/contents/${path}`, { method:"PUT", headers:{"Content-Type":"application/json"}, body: JSON.stringify(body) });
-  if(!res.ok){ const t = await res.text(); throw new Error(`GitHub save failed (${res.status}): ${t.slice(0,200)}`); }
+  if(!res.ok){
+    const t = await res.text();
+    // 409 = someone else's write (or replication lag) beat us to it — the sha we read is stale.
+    // Re-reading and retrying almost always succeeds within a couple of attempts.
+    const isShaConflict = res.status === 409;
+    // GitHub's "secondary rate limit" — back off longer and retry.
+    const isRateLimited = res.status === 403 && /rate limit/i.test(t);
+    if((isShaConflict || isRateLimited) && attempt < 4){
+      const wait = isRateLimited ? 2500 : 500 * (attempt + 1);
+      await new Promise(r => setTimeout(r, wait));
+      return ghPutFile(path, base64Content, message, attempt + 1);
+    }
+    throw new Error(`GitHub save failed (${res.status}): ${t.slice(0,200)}`);
+  }
   const data = await res.json();
   return data.content && data.content.download_url;
 }
@@ -1949,26 +1962,31 @@ document.getElementById("productForm").addEventListener("submit", async e=>{
   };
   if(!p.name) return;
   submitBtn.disabled = true;
-  if(ghConnected()){
-    try{
-      if(p.img){ toast("Uploading photo..."); p.img = await ghUploadImage(p.img, "products", p.id); }
-      state.products.unshift(p); saveState();
+  let uploadedPath = "";
+  try{
+    if(ghConnected()){
+      if(p.img){ toast("Uploading photo..."); p.img = await ghUploadImage(p.img, "products", p.id); uploadedPath = p.img; }
+      state.products.unshift(p); saveState(); renderProducts();
       toast("Updating catalog...");
       await ghPublishData(`Add product: ${p.name}`);
       toast("Published live ✓");
-    }catch(err){
-      state.products.unshift(p); saveState();
-      toast("Saved locally — publish failed: "+err.message);
+    }else{
+      state.products.unshift(p); saveState(); renderProducts();
+      toast("Product added ✓ (local preview — connect GitHub to publish)");
     }
-  }else{
-    state.products.unshift(p); saveState();
-    toast("Product added ✓ (local preview — connect GitHub to publish)");
+    e.target.reset();
+    pendingProductImg = "";
+    document.getElementById("pImagePreview").classList.remove("show");
+  }catch(err){
+    // Publish failed after we'd already shown it locally — take it back out so this
+    // browser matches what's actually live, and clean up any photo we'd uploaded.
+    state.products = state.products.filter(x => x.id !== p.id);
+    saveState(); renderProducts();
+    if(uploadedPath){ try{ await ghDeleteImageIfOwned(uploadedPath, p.name); }catch(e2){} }
+    toast("Couldn't publish — nothing changed live. "+err.message);
   }
   submitBtn.disabled = false;
-  e.target.reset();
-  pendingProductImg = "";
-  document.getElementById("pImagePreview").classList.remove("show");
-  renderProducts(); refreshAdminLists();
+  refreshAdminLists();
 });
 
 /* ============================================================
@@ -1994,26 +2012,29 @@ document.getElementById("offerForm").addEventListener("submit", async e=>{
   };
   if(!o.title) return;
   submitBtn.disabled = true;
-  if(ghConnected()){
-    try{
-      if(o.img){ toast("Uploading photo..."); o.img = await ghUploadImage(o.img, "offers", o.id); }
-      state.offers.push(o); saveState();
+  let uploadedPath = "";
+  try{
+    if(ghConnected()){
+      if(o.img){ toast("Uploading photo..."); o.img = await ghUploadImage(o.img, "offers", o.id); uploadedPath = o.img; }
+      state.offers.push(o); saveState(); renderOffers();
       toast("Updating offers...");
       await ghPublishData(`Add offer: ${o.title}`);
       toast("Published live ✓");
-    }catch(err){
-      state.offers.push(o); saveState();
-      toast("Saved locally — publish failed: "+err.message);
+    }else{
+      state.offers.push(o); saveState(); renderOffers();
+      toast("Offer added ✓ (local preview — connect GitHub to publish)");
     }
-  }else{
-    state.offers.push(o); saveState();
-    toast("Offer added ✓ (local preview — connect GitHub to publish)");
+    e.target.reset();
+    pendingOfferImg = "";
+    document.getElementById("oImagePreview").classList.remove("show");
+  }catch(err){
+    state.offers = state.offers.filter(x => x.id !== o.id);
+    saveState(); renderOffers();
+    if(uploadedPath){ try{ await ghDeleteImageIfOwned(uploadedPath, o.title); }catch(e2){} }
+    toast("Couldn't publish — nothing changed live. "+err.message);
   }
   submitBtn.disabled = false;
-  e.target.reset();
-  pendingOfferImg = "";
-  document.getElementById("oImagePreview").classList.remove("show");
-  renderOffers(); refreshAdminLists();
+  refreshAdminLists();
 });
 
 /* ============================================================
@@ -2037,27 +2058,31 @@ document.getElementById("feedbackForm").addEventListener("submit", async e=>{
     img: pendingFeedbackImg
   };
   submitBtn.disabled = true;
-  if(ghConnected()){
-    try{
+  let uploadedPath = "";
+  try{
+    if(ghConnected()){
       toast("Uploading screenshot...");
       f.img = await ghUploadImage(f.img, "feedback", f.id);
-      state.feedback.unshift(f); saveState();
+      uploadedPath = f.img;
+      state.feedback.unshift(f); saveState(); renderFeedback();
       toast("Updating reviews...");
       await ghPublishData(`Add review: ${f.caption||f.id}`);
       toast("Published live ✓");
-    }catch(err){
-      state.feedback.unshift(f); saveState();
-      toast("Saved locally — publish failed: "+err.message);
+    }else{
+      state.feedback.unshift(f); saveState(); renderFeedback();
+      toast("Review added ✓ (local preview — connect GitHub to publish)");
     }
-  }else{
-    state.feedback.unshift(f); saveState();
-    toast("Review added ✓ (local preview — connect GitHub to publish)");
+    e.target.reset();
+    pendingFeedbackImg = "";
+    document.getElementById("fImagePreview").classList.remove("show");
+  }catch(err){
+    state.feedback = state.feedback.filter(x => x.id !== f.id);
+    saveState(); renderFeedback();
+    if(uploadedPath){ try{ await ghDeleteImageIfOwned(uploadedPath, f.caption||"review"); }catch(e2){} }
+    toast("Couldn't publish — nothing changed live. "+err.message);
   }
   submitBtn.disabled = false;
-  e.target.reset();
-  pendingFeedbackImg = "";
-  document.getElementById("fImagePreview").classList.remove("show");
-  renderFeedback(); refreshAdminLists();
+  refreshAdminLists();
 });
 
 document.getElementById("fHappyOverride").addEventListener("change", async e=>{
@@ -2099,6 +2124,7 @@ document.getElementById("profileForm").addEventListener("submit", async e=>{
   e.preventDefault();
   const submitBtn = e.target.querySelector("button[type=submit]");
   if(!state.settings) state.settings = {};
+  const backup = JSON.parse(JSON.stringify(state.settings));
   const title = document.getElementById("proTitle").value.trim();
   const bio = document.getElementById("proBio").value.trim();
   state.settings.profileTitle = title;
@@ -2107,18 +2133,21 @@ document.getElementById("profileForm").addEventListener("submit", async e=>{
   state.settings.profileImg = newImg;
   submitBtn.disabled = true;
   if(ghConnected()){
+    let uploadedPath = "";
     try{
-      if(pendingProfileImg){ toast("Uploading photo..."); state.settings.profileImg = await ghUploadImage(pendingProfileImg, "profile", "owner"); }
-      saveState();
+      if(pendingProfileImg){ toast("Uploading photo..."); state.settings.profileImg = await ghUploadImage(pendingProfileImg, "profile", "owner"); uploadedPath = state.settings.profileImg; }
+      saveState(); renderProfile();
       toast("Updating profile...");
       await ghPublishData("Update profile section");
       toast("Published live ✓");
     }catch(err){
-      saveState();
-      toast("Saved locally — publish failed: "+err.message);
+      state.settings = backup;
+      saveState(); renderProfile();
+      if(uploadedPath){ try{ await ghDeleteImageIfOwned(uploadedPath, "profile photo"); }catch(e2){} }
+      toast("Couldn't publish — nothing changed live. "+err.message);
     }
   }else{
-    saveState();
+    saveState(); renderProfile();
     toast("Profile saved ✓ (local preview — connect GitHub to publish)");
   }
   submitBtn.disabled = false;
@@ -2133,49 +2162,76 @@ document.getElementById("profileForm").addEventListener("submit", async e=>{
 async function removeProduct(id){
   const item = state.products.find(p=>p.id===id);
   if(!item || !confirm("Remove this product?")) return;
+
+  const backup = state.products.slice();
   state.products = state.products.filter(p=>p.id!==id);
   saveState(); renderProducts(); refreshAdminLists();
-  if(ghConnected()){
-    toast("Removing from repository...");
-    try{
-      if(item.img) await ghDeleteImageIfOwned(item.img, item.name);
-      await ghPublishData(`Remove product: ${item.name}`);
-      toast("Removed & published ✓");
-    }catch(err){ toast("Removed locally — publish failed: "+err.message); }
-  }else{
-    toast("Product removed");
+
+  if(!ghConnected()){ toast("Product removed"); return; }
+
+  toast("Updating live site...");
+  try{
+    // Update the catalog FIRST. Only once that succeeds do we touch the image file —
+    // this way a failed publish never leaves data.json pointing at a deleted photo.
+    await ghPublishData(`Remove product: ${item.name}`);
+    if(item.img){
+      try{ await ghDeleteImageIfOwned(item.img, item.name); }
+      catch(imgErr){ console.warn("Old photo left in repo (harmless):", imgErr); }
+    }
+    toast("Removed & published ✓");
+  }catch(err){
+    // Publish failed — nothing actually changed live, so undo the local change too.
+    state.products = backup;
+    saveState(); renderProducts(); refreshAdminLists();
+    toast("Couldn't publish — nothing changed live. "+err.message);
   }
 }
 async function removeOffer(id){
   const item = state.offers.find(o=>o.id===id);
   if(!item || !confirm("Delete this offer?")) return;
+
+  const backup = state.offers.slice();
   state.offers = state.offers.filter(o=>o.id!==id);
   saveState(); renderOffers(); refreshAdminLists();
-  if(ghConnected()){
-    toast("Removing from repository...");
-    try{
-      if(item.img) await ghDeleteImageIfOwned(item.img, item.title);
-      await ghPublishData(`Remove offer: ${item.title}`);
-      toast("Removed & published ✓");
-    }catch(err){ toast("Removed locally — publish failed: "+err.message); }
-  }else{
-    toast("Offer deleted");
+
+  if(!ghConnected()){ toast("Offer deleted"); return; }
+
+  toast("Updating live site...");
+  try{
+    await ghPublishData(`Remove offer: ${item.title}`);
+    if(item.img){
+      try{ await ghDeleteImageIfOwned(item.img, item.title); }
+      catch(imgErr){ console.warn("Old photo left in repo (harmless):", imgErr); }
+    }
+    toast("Removed & published ✓");
+  }catch(err){
+    state.offers = backup;
+    saveState(); renderOffers(); refreshAdminLists();
+    toast("Couldn't publish — nothing changed live. "+err.message);
   }
 }
 async function removeFeedback(id){
   const item = state.feedback.find(f=>f.id===id);
   if(!item || !confirm("Remove this review?")) return;
+
+  const backup = state.feedback.slice();
   state.feedback = state.feedback.filter(f=>f.id!==id);
   saveState(); renderFeedback(); refreshAdminLists();
-  if(ghConnected()){
-    toast("Removing from repository...");
-    try{
-      if(item.img) await ghDeleteImageIfOwned(item.img, item.caption||"review");
-      await ghPublishData(`Remove review: ${item.caption||item.id}`);
-      toast("Removed & published ✓");
-    }catch(err){ toast("Removed locally — publish failed: "+err.message); }
-  }else{
-    toast("Review removed");
+
+  if(!ghConnected()){ toast("Review removed"); return; }
+
+  toast("Updating live site...");
+  try{
+    await ghPublishData(`Remove review: ${item.caption||item.id}`);
+    if(item.img){
+      try{ await ghDeleteImageIfOwned(item.img, item.caption||"review"); }
+      catch(imgErr){ console.warn("Old photo left in repo (harmless):", imgErr); }
+    }
+    toast("Removed & published ✓");
+  }catch(err){
+    state.feedback = backup;
+    saveState(); renderFeedback(); refreshAdminLists();
+    toast("Couldn't publish — nothing changed live. "+err.message);
   }
 }
 function refreshAdminLists(){
@@ -2291,7 +2347,7 @@ document.getElementById("ghConnectBtn").addEventListener("click", async ()=>{
   errEl.textContent = "";
   if(!owner || !repo || !token){ errEl.textContent = "Please fill in username, repo, and token."; return; }
   ghSaveSettings(owner, repo, branch);
-  sessionStorage.setItem("vv_gh_token", token);
+  localStorage.setItem("vv_gh_token", token);
   // verify access with a lightweight repo read
   try{
     const res = await ghApi("", {method:"GET"});
