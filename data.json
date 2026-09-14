@@ -1,6 +1,15 @@
 {
   "products": [
     {
+      "id": "pmu0rg7v8rrk1",
+      "name": "Kaviri Churi",
+      "category": "Churi",
+      "price": 299,
+      "desc": "চুড়ির ঝনঝন শব্দেই যখন সাজটা হয়ে ওঠে আরও সুন্দর!",
+      "badge": "New",
+      "img": "https://cdn.jsdelivr.net/gh/shovonSharma/velvetvibe@main/assets/products/pmu0rg7v8rrk1.jpg"
+    },
+    {
       "id": "pmu0rc1vn0883",
       "name": "লাল পরি কাশ্মীরি চুড়ি",
       "category": "Churi",
