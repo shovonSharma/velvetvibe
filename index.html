@@ -1,5 +1,5 @@
-<!-- OM NAMAH BHAGWATE RUDRAY NAMAH -->
-<!-- I want to marry her -->
+<!-- OM NAMO BHAGAWATE RUDRAY NAMAH -->
+<!-- I want to marry her, MAHADEV -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1138,10 +1138,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
               <option value="Limited">Limited</option>
             </select>
           </div>
-          <div class="field"><label>Photo</label><input type="file" id="pImage" accept="image/*">
+          <div class="field"><label>Photo <span id="pImageOptionalNote" style="text-transform:none; letter-spacing:0; font-weight:400; display:none;">(leave empty to keep current photo)</span></label><input type="file" id="pImage" accept="image/*">
             <div class="upload-preview" id="pImagePreview"><img alt=""></div>
           </div>
-          <button type="submit" class="btn btn-primary form-submit">Add Product</button>
+          <div style="display:flex; gap:8px;">
+            <button type="submit" class="btn btn-primary form-submit" id="pSubmitBtn" style="flex:1;">Add Product</button>
+            <button type="button" class="btn btn-outline" id="pCancelEditBtn" style="display:none;">Cancel</button>
+          </div>
         </form>
         <div class="admin-list"><h4>Current products</h4><div id="productList"></div></div>
       </div>
@@ -1973,6 +1976,7 @@ function openAdminTab(name){
    ADMIN — PRODUCT FORM
    ============================================================ */
 let pendingProductImg = "";
+let editingProductId = null; // null = "Add Product" mode; a product id = "Save Changes" mode
 document.getElementById("pImage").addEventListener("change", async e=>{
   const file = e.target.files[0]; if(!file) return;
   pendingProductImg = await compressImage(file);
@@ -1980,20 +1984,86 @@ document.getElementById("pImage").addEventListener("change", async e=>{
   prev.querySelector("img").src = pendingProductImg;
   prev.classList.add("show");
 });
+function startEditProduct(id){
+  const p = state.products.find(x=>x.id===id);
+  if(!p) return;
+  editingProductId = id;
+  document.getElementById("pName").value = p.name;
+  document.getElementById("pCategory").value = p.category;
+  document.getElementById("pPrice").value = p.price;
+  document.getElementById("pDesc").value = p.desc || "";
+  document.getElementById("pBadge").value = p.badge || "";
+  pendingProductImg = ""; // empty = "no new photo chosen" — keep existing on save
+  const prev = document.getElementById("pImagePreview");
+  if(p.img){ prev.querySelector("img").src = p.img; prev.classList.add("show"); }
+  else{ prev.classList.remove("show"); }
+  document.getElementById("pImageOptionalNote").style.display = "inline";
+  document.getElementById("pSubmitBtn").textContent = "Save Changes";
+  document.getElementById("pCancelEditBtn").style.display = "inline-flex";
+  openAdminTab("products");
+  document.getElementById("pName").scrollIntoView({behavior:"smooth", block:"center"});
+}
+function cancelEditProduct(){
+  editingProductId = null;
+  document.getElementById("productForm").reset();
+  pendingProductImg = "";
+  document.getElementById("pImagePreview").classList.remove("show");
+  document.getElementById("pImageOptionalNote").style.display = "none";
+  document.getElementById("pSubmitBtn").textContent = "Add Product";
+  document.getElementById("pCancelEditBtn").style.display = "none";
+}
+document.getElementById("pCancelEditBtn").addEventListener("click", cancelEditProduct);
 document.getElementById("productForm").addEventListener("submit", async e=>{
   e.preventDefault();
-  const submitBtn = e.target.querySelector("button[type=submit]");
-  const p = {
-    id: uid("p"),
-    name: document.getElementById("pName").value.trim(),
-    category: document.getElementById("pCategory").value,
-    price: parseFloat(document.getElementById("pPrice").value) || 0,
-    desc: document.getElementById("pDesc").value.trim(),
-    badge: document.getElementById("pBadge").value,
-    img: pendingProductImg
-  };
-  if(!p.name) return;
+  const submitBtn = document.getElementById("pSubmitBtn");
+  const name = document.getElementById("pName").value.trim();
+  const category = document.getElementById("pCategory").value;
+  const price = parseFloat(document.getElementById("pPrice").value) || 0;
+  const desc = document.getElementById("pDesc").value.trim();
+  const badge = document.getElementById("pBadge").value;
+  if(!name) return;
   submitBtn.disabled = true;
+
+  if(editingProductId){
+    // ---- SAVE EXISTING PRODUCT ----
+    const idx = state.products.findIndex(x=>x.id===editingProductId);
+    if(idx === -1){ submitBtn.disabled = false; cancelEditProduct(); return; }
+    const backup = JSON.parse(JSON.stringify(state.products[idx]));
+    const updated = { ...backup, name, category, price, desc, badge };
+    let newUploadedPath = "";
+    try{
+      if(ghConnected()){
+        if(pendingProductImg){
+          toast("Uploading new photo...");
+          updated.img = await ghUploadImage(pendingProductImg, "products", updated.id);
+          newUploadedPath = updated.img;
+        }
+        state.products[idx] = updated; saveState(); renderProducts();
+        toast("Updating catalog...");
+        await ghPublishData(`Update product: ${updated.name}`);
+        toast("Published live ✓");
+        // Only now that the publish succeeded is it safe to retire the old photo (if replaced).
+        if(newUploadedPath && backup.img && backup.img !== updated.img){
+          try{ await ghDeleteImageIfOwned(backup.img, backup.name); }catch(e2){}
+        }
+      }else{
+        state.products[idx] = updated; saveState(); renderProducts();
+        toast("Product updated ✓ (local preview — connect GitHub to publish)");
+      }
+      cancelEditProduct();
+    }catch(err){
+      state.products[idx] = backup;
+      saveState(); renderProducts();
+      if(newUploadedPath){ try{ await ghDeleteImageIfOwned(newUploadedPath, updated.name); }catch(e2){} }
+      toast("Couldn't publish — nothing changed live. "+err.message);
+    }
+    submitBtn.disabled = false;
+    refreshAdminLists();
+    return;
+  }
+
+  // ---- ADD NEW PRODUCT ----
+  const p = { id: uid("p"), name, category, price, desc, badge, img: pendingProductImg };
   let uploadedPath = "";
   try{
     if(ghConnected()){
@@ -2194,6 +2264,7 @@ document.getElementById("profileForm").addEventListener("submit", async e=>{
 async function removeProduct(id){
   const item = state.products.find(p=>p.id===id);
   if(!item || !confirm("Remove this product?")) return;
+  if(editingProductId === id) cancelEditProduct();
 
   const backup = state.products.slice();
   state.products = state.products.filter(p=>p.id!==id);
@@ -2290,7 +2361,10 @@ function refreshAdminLists(){
     <div class="admin-row">
       ${p.img ? `<img class="thumb" src="${p.img}">` : `<div class="thumb"></div>`}
       <div class="info"><b>${esc(p.name)}</b><span>${esc(p.category)} · ৳${p.price}</span></div>
-      <button data-del-product="${p.id}" aria-label="Delete">
+      <button data-edit-product="${p.id}" aria-label="Edit" title="Edit">
+        <svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+      </button>
+      <button data-del-product="${p.id}" aria-label="Delete" title="Delete">
         <svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m2 0v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6h12z"/></svg>
       </button>
     </div>
@@ -2316,6 +2390,7 @@ function refreshAdminLists(){
     </div>
   `).join("") || `<p style="font-size:13px; color:var(--plum-soft);">No reviews yet.</p>`;
 
+  document.querySelectorAll("[data-edit-product]").forEach(b=> b.addEventListener("click", ()=> startEditProduct(b.dataset.editProduct)));
   document.querySelectorAll("[data-del-product]").forEach(b=> b.addEventListener("click", ()=> removeProduct(b.dataset.delProduct)));
   document.querySelectorAll("[data-del-offer]").forEach(b=> b.addEventListener("click", ()=> removeOffer(b.dataset.delOffer)));
   document.querySelectorAll("[data-del-feedback]").forEach(b=> b.addEventListener("click", ()=> removeFeedback(b.dataset.delFeedback)));
