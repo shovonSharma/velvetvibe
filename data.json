@@ -1,15 +1,6 @@
 {
   "products": [
     {
-      "id": "pmu1240whh31z",
-      "name": "সবুজ পরি কাশ্মীরি চুড়ি",
-      "category": "Churi",
-      "price": 259,
-      "desc": "চুড়ির ঝনঝন শব্দেই যখন সাজটা হয়ে ওঠে আরও সুন্দর!",
-      "badge": "Bestseller",
-      "img": "https://cdn.jsdelivr.net/gh/shovonSharma/velvetvibe@main/assets/products/pmu1240whh31z.jpg"
-    },
-    {
       "id": "pmu0rg7v8rrk1",
       "name": "Kaviri Churi",
       "category": "Churi",
