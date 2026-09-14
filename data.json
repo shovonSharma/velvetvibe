@@ -1,6 +1,15 @@
 {
   "products": [
     {
+      "id": "pmu1fnnbpsb9o",
+      "name": "Neck Piece V",
+      "category": "Neck Chains",
+      "price": 149,
+      "desc": "মেয়েদের পছন্দের সেই elegant look এখন এক নেকপিসেই!",
+      "badge": "New",
+      "img": "https://cdn.jsdelivr.net/gh/shovonSharma/velvetvibe@main/assets/products/pmu1fnnbpsb9o.jpg"
+    },
+    {
       "id": "pmu1ey9mzpohj",
       "name": "কাশ্মীরি চুড়ি - রঙের মেলা",
       "category": "Churi",
