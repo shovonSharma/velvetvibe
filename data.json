@@ -1,6 +1,15 @@
 {
   "products": [
     {
+      "id": "pmu0qx0ct7g63",
+      "name": "Neck Piece",
+      "category": "Neck Chains",
+      "price": 139,
+      "desc": "color guaranteed",
+      "badge": "New",
+      "img": "https://cdn.jsdelivr.net/gh/shovonSharma/velvetvibe@main/assets/products/pmu0qx0ct7g63.jpg"
+    },
+    {
       "id": "pmu0qbtwp4bvw",
       "name": "Neckpiece Blue Love",
       "category": "Neck Chains",
