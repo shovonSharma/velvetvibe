@@ -1,6 +1,15 @@
 {
   "products": [
     {
+      "id": "pmu1frez86og6",
+      "name": "Neck Piece U",
+      "category": "Neck Chains",
+      "price": 149,
+      "desc": "নিজের জন্য হোক বা প্রিয় কাউকে gift—একবার দেখলে পছন্দ হবেই!",
+      "badge": "New",
+      "img": "https://cdn.jsdelivr.net/gh/shovonSharma/velvetvibe@main/assets/products/pmu1frez86og6.jpg"
+    },
+    {
       "id": "pmu1fnnbpsb9o",
       "name": "Neck Piece V",
       "category": "Neck Chains",
